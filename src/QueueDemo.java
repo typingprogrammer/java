@@ -28,6 +28,7 @@ public class QueueDemo {
 
         System.out.println("size = " + queue.size());
         System.out.println("is empty = " + queue.isEmpty());
+
     }
 
 }
