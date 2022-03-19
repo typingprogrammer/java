@@ -2,8 +2,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Tree {
-    Tree left;
     int value;
+    Tree left;
     Tree right;
 
     public Tree(int value) {
@@ -11,7 +11,10 @@ class Tree {
     }
 }
 
+//root, trunk, branch, leaf
+
 public class BinaryTreeDemo {
+
 
     private static Tree formTree() {
 
@@ -45,12 +48,70 @@ public class BinaryTreeDemo {
         return root;
     }
 
-    public static void main(String[] args) {
-        Tree root = formTree();
-        depthFirstSearch(root);
-        breadthFirstSearch(root);
+    /*
+                  1
+                /   \
+               2     3
+              / \   / \
+             4  5  6   7
 
+        */
+
+
+    //breadth first search -> 1,2,3,4,5,6,7
+    public static void breathFirstSearch(Tree t) {
+        System.out.println("breadthFirstSearch");
+        if(t == null)
+            return;
+
+        Queue<Tree> queue = new LinkedList<>();
+        queue.add(t);
+
+        while(!queue.isEmpty()) {
+           Tree dequeuedElement = queue.poll();
+            System.out.print(dequeuedElement.value + "-->");
+
+           if(dequeuedElement.left != null) {
+               queue.offer(dequeuedElement.left);
+           }
+
+            if(dequeuedElement.right != null) {
+                queue.offer(dequeuedElement.right);
+            }
+        }
     }
+
+
+
+    //depth first search
+    // in order -> left, root, right => 4,2,5,1,6,3,7
+    // pre order -> root, left, right => 1,2,4,5,3,6,7
+    // post order -> left, right, root => 4,5,2,6,7,3,1
+
+    public static void inOrder(Tree t) {
+        if(t != null) {
+            inOrder(t.left);
+            System.out.print(t.value + ",");
+            inOrder(t.right);
+        }
+    }
+
+    public static void preOrder(Tree t) {
+        if(t != null) {
+            System.out.print(t.value + ",");
+            preOrder(t.left);
+            preOrder(t.right);
+        }
+    }
+
+    public static void postOrder(Tree t) {
+        if(t != null) {
+            postOrder(t.left);
+            postOrder(t.right);
+            System.out.print(t.value + ",");
+        }
+    }
+
 
     public static void depthFirstSearch(Tree t) {
         System.out.println("depthFirstSearch");
@@ -67,50 +128,9 @@ public class BinaryTreeDemo {
         System.out.println();
     }
 
-    public static void inOrder(Tree t) {
-        if( t != null) {
-            inOrder(t.left);
-            System.out.print(t.value + "-->");
-            inOrder(t.right);
-        }
-    }
-
-    public static void preOrder(Tree t) {
-        if( t != null) {
-            System.out.print(t.value + "-->");
-            inOrder(t.left);
-            inOrder(t.right);
-        }
-    }
-
-    public static void postOrder(Tree t) {
-        if( t != null) {
-            inOrder(t.left);
-            inOrder(t.right);
-            System.out.print(t.value + "-->");
-        }
-    }
-
-    public static void breadthFirstSearch(Tree t) {
-
-        System.out.println("breadthFirstSearch");
-        if(t == null)
-            return;
-
-        Queue<Tree> queue = new LinkedList<>();
-        queue.add(t);
-
-        while(!queue.isEmpty()) {
-            Tree dequeuedElement = queue.poll();
-            System.out.print(dequeuedElement.value + "-->");
-
-            if(dequeuedElement.left != null) {
-                queue.offer(dequeuedElement.left);
-            }
-
-            if(dequeuedElement.right != null) {
-                queue.add(dequeuedElement.right);
-            }
-        }
+    public static void main(String[] args) {
+        Tree root = formTree();
+        depthFirstSearch(root);
+        breathFirstSearch(root);
     }
 }

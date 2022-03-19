@@ -3,6 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+
 class NaryTree {
     int value;
     List<NaryTree> children;
@@ -25,9 +26,6 @@ public class NaryTreeDemo {
                5  6  7
 
          */
-
-
-
 
         NaryTree root = new NaryTree(1);
         NaryTree rootChild1 = new NaryTree(2);
@@ -56,21 +54,24 @@ public class NaryTreeDemo {
                     depthFirstSearch(child);
                 }
             }
-            System.out.print(tree.value + "-->");
+            System.out.print(tree.value + ",");
         }
+
+
     }
 
     public static void breadthFirstSearch(NaryTree tree) {
         System.out.println("breadthFirstSearch");
+
         if(tree == null)
             return;
 
-        Queue<NaryTree> queue = new LinkedList<>();
+        Queue<NaryTree>  queue = new LinkedList<>();
         queue.add(tree);
 
         while(!queue.isEmpty()) {
             NaryTree dequeuedNode = queue.poll();
-            System.out.print(dequeuedNode.value + "-->");
+            System.out.print(dequeuedNode.value + ",");
             if(!dequeuedNode.children.isEmpty()) {
                 for(NaryTree child: dequeuedNode.children) {
                     queue.offer(child);
@@ -85,5 +86,6 @@ public class NaryTreeDemo {
         depthFirstSearch(root);
         System.out.println();
         breadthFirstSearch(root);
+
     }
 }
